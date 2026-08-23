@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="web.css">
 </head>
 
-<body> 
-
+<body>   
  <div class="banner-container">
   <img src="fotos/banner.png" alt="banner" class="banner-normal">
 </div>
@@ -35,16 +34,19 @@
         <li data-tooltip-key="cv"><a href="fotos/Maximiliano Funes CV.pdf" download>
           <img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/readdotcv.svg" alt="Read.cv" width="40"></a></li>
       </ul>
+    </div>
     <div class="idioma-wrapper" data-tooltip-key="idioma">
       <select onchange="cambiarIdioma(this.value)" class="idioma-select">
         <option value="en" id="eng">EN</option>
         <option value="es" id="esp">ES</option>
       </select>
     </div>
-  </div>
-</div>
+    <button id="themeToggle" class="theme-toggle" data-tooltip-key="theme" aria-label="Cambiar tema">
+      <img id="themeIcon" src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/moon.svg" alt="tema" width="20">
+    </button>
   </div>
 
+</div>
 <div class="top-cards">
 
  <section class="skills-section top-card">

@@ -66,7 +66,8 @@ const mensajesHover = {
   instagram: { en: "View Instagram profile", es: "Ver perfil de Instagram" },
   gmail: { en: "Send an email", es: "Enviar un email" },
   cv: { en: "Read CV", es: "Leer curriculum" },
-  idioma: { en: "Language selector", es: "Selector de idiomas" }
+  idioma: { en: "Language selector", es: "Selector de idiomas" },
+  theme: { en: "Toggle theme", es: "Cambiar tema" }
 };
 
 const mensajesClick = {
@@ -146,6 +147,32 @@ function ajustarScrollIconos() {
     }
   });
 }
+
+const toggleBtn = document.getElementById('themeToggle');
+
+const mensajesTema = {
+  light: { en: "Light theme on", es: "Tema claro activado" },
+  dark: { en: "Dark theme on", es: "Tema oscuro activado" }
+};
+
+function mensaTema(tema) {
+  document.documentElement.setAttribute('data-theme', tema);
+  localStorage.setItem('tema', tema);
+  const icono = document.getElementById('themeIcon');
+  icono.src = tema === 'light'
+    ? 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/sun.svg'
+    : 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/moon.svg';
+}
+
+const temaGuardado = localStorage.getItem('tema') || 'dark';
+mensaTema(temaGuardado);
+
+toggleBtn.addEventListener('click', () => {
+  const temaActual = document.documentElement.getAttribute('data-theme');
+  const nuevoTema = temaActual === 'light' ? 'dark' : 'light';
+  mensaTema(nuevoTema);
+  mostrarToast(mensajesTema[nuevoTema][idiomaActual]);
+});
 
 document.addEventListener('DOMContentLoaded', ajustarScrollIconos);
 window.addEventListener('resize', ajustarScrollIconos);
