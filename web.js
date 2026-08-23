@@ -67,7 +67,7 @@ const mensajesHover = {
   gmail: { en: "Send an email", es: "Enviar un email" },
   cv: { en: "Read CV", es: "Leer curriculum" },
   idioma: { en: "Language selector", es: "Selector de idiomas" },
-  theme: { en: "Toggle theme", es: "Cambiar tema" }
+  theme: { en: "Change theme", es: "Cambiar tema" }
 };
 
 const mensajesClick = {
@@ -89,6 +89,12 @@ function actualizarTooltips() {
 
 function mostrarToast(texto) {
   const container = document.getElementById('toast-container');
+
+  const MAX_TOASTS = 4;
+  while (container.children.length >= MAX_TOASTS) {
+    container.firstElementChild.remove();
+  }
+
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = texto;
@@ -148,7 +154,7 @@ function ajustarScrollIconos() {
   });
 }
 
-const toggleBtn = document.getElementById('themeToggle');
+const changeBtn = document.getElementById('themechanger');
 
 const mensajesTema = {
   light: { en: "Light theme on", es: "Tema claro activado" },
@@ -167,7 +173,7 @@ function mensaTema(tema) {
 const temaGuardado = localStorage.getItem('tema') || 'dark';
 mensaTema(temaGuardado);
 
-toggleBtn.addEventListener('click', () => {
+changeBtn.addEventListener('click', () => {
   const temaActual = document.documentElement.getAttribute('data-theme');
   const nuevoTema = temaActual === 'light' ? 'dark' : 'light';
   mensaTema(nuevoTema);

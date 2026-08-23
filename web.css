@@ -124,7 +124,7 @@ html, body {
 }
 
 /*selecto de temas*/
-.theme-toggle {
+.theme-changer {
   background-color: var(--color-pill-bg);
   border: none;
   border-radius: 100%;
@@ -138,10 +138,10 @@ html, body {
   margin-left: 0;
   font: inherit;
 }
-.theme-toggle:hover {
+.theme-changer:hover {
   transform: translateY(-20%) scale(1.05);
 }
-.theme-toggle img {
+.theme-changer img {
   width: 40px;
   height: 40px;
 }
@@ -386,26 +386,38 @@ footer {
   right: 30px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   z-index: 999;
+  max-height: 80vh;
+  overflow: hidden;
+  align-items: flex-end;
 }
 .toast {
   background-color: var(--color-card-bg);
   color: var(--color-text);
   padding: 20px 30px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px var(--color-shadow-hover);
+  border: 1px solid var(--color-shadow-hover);
   font-size: 1,1em;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  margin-top: -30px;
+  min-width: 220px;
+}
+.toast:first-child {
+  margin-top: 0;
+}
+.toast:not(:last-child) {
+  box-shadow: none;
 }
 .toast.mostrar {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* ===== RESPONSIVE ===== */
+.toast:nth-last-child(n+4) {
+  transform: scale(0.94) translateY(10px);
+  opacity: 0.6;
+}
 
 /* Tablets / notebooks chicas */
 @media (max-width: 1024px) {
@@ -495,9 +507,17 @@ footer {
 .links-container ul li:first-child[data-tooltip-key]:hover::after {
   transform: translateX(0) translateY(0);
 }
+.links-container ul li:last-child[data-tooltip-key]::after {
+  left: auto;
+  right: 0;
+  transform: translateX(0) translateY(4px);
+}
+.links-container ul li:last-child[data-tooltip-key]:hover::after {
+  transform: translateX(0) translateY(0);
+}
 
 .idioma-wrapper,
-.theme-toggle {
+.theme-cahnger {
   margin-left: 0;
   flex-shrink: 0;
 }
@@ -538,6 +558,27 @@ footer {
   .identity-top h1 {
   font-size: 1.8em;
   word-break: break-word;
+}
+
+.idioma-select {
+  height: 38px;
+  padding: 6px 12px;
+  font-size: 0.85em;
+}
+
+.theme-changer {
+  width: 38px;
+  height: 38px;
+}
+
+.theme-changer img {
+  width: 30px;
+  height: 30px;
+}
+
+.links-container ul li a {
+  width: 46px;
+  height: 46px;
 }
 
 }
