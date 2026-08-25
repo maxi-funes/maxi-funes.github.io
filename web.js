@@ -180,5 +180,46 @@ changeBtn.addEventListener('click', () => {
   mostrarToast(mensajesTema[nuevoTema][idiomaActual]);
 });
 
+let mouseX = null;
+let mouseY = null;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+let iconoHovereado = null;
+
+const skillTooltip = document.getElementById('skill-tooltip');
+
+function actualizarHoverIconos() {
+  if (mouseX !== null) {
+    const elemento = document.elementFromPoint(mouseX, mouseY);
+    const icono = elemento && elemento.closest('.skills-icons img');
+
+    if (icono !== iconoHovereado) {
+      if (icono && icono.title) {
+        icono.classList.add('icon-hover');
+        const rect = icono.getBoundingClientRect();
+        skillTooltip.textContent = icono.title;
+        skillTooltip.style.left = `${rect.left + rect.width / 2}px`;
+        skillTooltip.style.top = `${rect.top - 5}px`;
+        skillTooltip.classList.add('mostrar');
+      } else {
+        skillTooltip.classList.remove('mostrar');
+      }
+      if (iconoHovereado) iconoHovereado.classList.remove('icon-hover');
+      iconoHovereado = icono;
+    } else if (icono) {
+      const rect = icono.getBoundingClientRect();
+      skillTooltip.style.left = `${rect.left + rect.width / 2}px`;
+      skillTooltip.style.top = `${rect.top - 5}px`;
+    }
+  }
+  requestAnimationFrame(actualizarHoverIconos);
+}
+
+requestAnimationFrame(actualizarHoverIconos);
+
 document.addEventListener('DOMContentLoaded', ajustarScrollIconos);
 window.addEventListener('resize', ajustarScrollIconos);

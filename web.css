@@ -25,11 +25,16 @@
   --color-pill-text: #24201d;
   --color-shadow-hover: rgba(0, 0, 0, 0.15);
 }
-[data-theme="light"] .skills-icons img:not(.white-filter) {
+[data-theme="light"] .skills-icons img.white-filter {
+  filter: brightness(0);
+}
+[data-theme="light"] .skills-icons img:not(.white-filter):not(.icon-color) {
   filter: invert(1);
 }
-[data-theme="light"] .skills-icons img.white-filter {
-  filter: none;
+
+::selection {
+  background-color: #8a8a8a;
+  color: #000000;
 }
 
 body {
@@ -222,8 +227,8 @@ transform: scale(1.03);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px 20px;
-  margin: 15px 0;
+  gap: 25px 20px;
+  margin: 18px 10px;
 }
 .skills-subtitle {
   font-weight: bold;
@@ -235,6 +240,7 @@ transform: scale(1.03);
   width: 100%;
   overflow: hidden;
   position: relative;
+  padding: 6px 0;
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
@@ -256,9 +262,24 @@ transform: scale(1.03);
 .skills-icons.fits .skills-icons-track img[aria-hidden] {
   display: none;
 }
-.skills-icons:hover .skills-icons-track {
-  animation-play-state: paused;
+#skill-tooltip {
+  position: fixed;
+  background-color: var(--color-card-bg);
+  color: var(--color-text);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 999;
+  transform: translate(-50%, -100%);
 }
+#skill-tooltip.mostrar {
+  opacity: 1;
+}
+
 @keyframes skills-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -269,7 +290,7 @@ transform: scale(1.03);
   transition: transform 0.2s ease;
   cursor: default;
 }
-.skills-icons img:hover {
+.skills-icons img.icon-hover {
   transform: scale(1.15);
 }
 .skills-icons img.white-filter {
@@ -397,7 +418,7 @@ footer {
   padding: 20px 30px;
   border-radius: 12px;
   border: 1px solid var(--color-shadow-hover);
-  font-size: 1,1em;
+  font-size: 1.2em;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -451,6 +472,10 @@ footer {
 .about-me-lateral {
   order: 1;
 }
+ .skills-section .card-header h2 {
+    min-width: 0;
+    white-space: normal;
+  }
 }
 
 /* Celulares */
